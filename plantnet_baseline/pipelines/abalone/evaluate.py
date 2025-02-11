@@ -2,7 +2,6 @@
 import json
 import logging
 import pathlib
-import pickle
 import tarfile
 
 import numpy as np
@@ -10,6 +9,7 @@ import pandas as pd
 import xgboost
 
 from sklearn.metrics import mean_squared_error
+import fickling
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -24,7 +24,7 @@ if __name__ == "__main__":
         tar.extractall(path=".")
 
     logger.debug("Loading xgboost model.")
-    model = pickle.load(open("xgboost-model", "rb"))
+    model = fickling.load(open("xgboost-model", "rb"))
 
     logger.debug("Reading test data.")
     test_path = "/opt/ml/processing/test/test.csv"
