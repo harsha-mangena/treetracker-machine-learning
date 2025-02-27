@@ -15,7 +15,7 @@ class DataLoader():
 
 
     def get_bounding_images(self, long1, long2, lat1, lat2):
-        return requests.get(self.url, params={"bounds": [long1, lat1, long2, lat2]}, headers=self.headers)
+        return requests.get(self.url, params={"bounds": [long1, lat1, long2, lat2]}, headers=self.headers, timeout=60)
 
     def download_image(self, url, id):
         fpath = os.path.join(self.download_dir, str(id)) # file corresponding to this id
@@ -42,5 +42,5 @@ class DataLoader():
                     json.dump(metadata,f)
 
     def put_hash(self, id, hash=0):
-        return requests.put(self.url + id + "/hash/", json={"hash": hash})
+        return requests.put(self.url + id + "/hash/", json={"hash": hash}, timeout=60)
 

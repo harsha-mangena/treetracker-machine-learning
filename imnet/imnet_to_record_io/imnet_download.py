@@ -35,7 +35,7 @@ def download_imnet_dataset(target_folder, synsets):
             savefile = os.path.join(save_dir, wnid + ".tar.gz")
             url = "http://www.image-net.org/download/synset?wnid=%s&username=%s&accesskey=%s&release=latest&src=stanford" % (
             wnid, _USER, _KEY)
-            item = requests.get(url)
+            item = requests.get(url, timeout=60)
 
             if item.status_code == 200:
                 print("Raw image: status code 200: success")
@@ -53,7 +53,7 @@ def download_imnet_dataset(target_folder, synsets):
 
         if not os.path.exists(bb_savedir):
             os.makedirs(bb_savedir)
-            item = requests.get(bb_url)
+            item = requests.get(bb_url, timeout=60)
             if item.status_code == 200:
                 print("Bounding box: status code 200: success")
             else:

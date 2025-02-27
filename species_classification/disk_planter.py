@@ -19,7 +19,7 @@ import imghdr
 def id_to_urls(word_net_id):
     """Accepts a word net id and returns the related urls to the images as list"""
     
-    page = requests.get(f"http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={word_net_id}")    
+    page = requests.get(f"http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={word_net_id}", timeout=60)    
     # BeautifulSoup is an HTML parsing library
     
     soup = BeautifulSoup(page.content, 'html.parser')#puts the content of the website into the soup variable, each url on a different line
