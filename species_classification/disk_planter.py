@@ -7,10 +7,10 @@ Created on Sun Jul 19 12:07:48 2020
 
 
 from bs4 import BeautifulSoup
-import requests
 import urllib
 import os
 import imghdr 
+from security import safe_requests
 
 #word_to_id = {"Willow" : "n12725940", "Bonsai" : "n13112035"}
 
@@ -19,7 +19,7 @@ import imghdr
 def id_to_urls(word_net_id):
     """Accepts a word net id and returns the related urls to the images as list"""
     
-    page = requests.get(f"http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={word_net_id}")    
+    page = safe_requests.get(f"http://www.image-net.org/api/text/imagenet.synset.geturls?wnid={word_net_id}")    
     # BeautifulSoup is an HTML parsing library
     
     soup = BeautifulSoup(page.content, 'html.parser')#puts the content of the website into the soup variable, each url on a different line

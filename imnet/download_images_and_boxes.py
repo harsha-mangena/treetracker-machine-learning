@@ -1,8 +1,8 @@
 import argparse
-import requests
 import os
 import time
 import tarfile
+from security import safe_requests
 
 '''
 Important! The credentials here are private, please do not share these any external party
@@ -58,7 +58,7 @@ if __name__ == "__main__":
             savefile = os.path.join(save_dir, wnid + ".tar.gz")
             url = "http://www.image-net.org/download/synset?wnid=%s&username=%s&accesskey=%s&release=latest&src=stanford" % (
             wnid, _USER, _KEY)
-            item = requests.get(url)
+            item = safe_requests.get(url)
             if item.status_code == 200:
                 print("Raw image: status code 200: success")
             else:
@@ -73,7 +73,7 @@ if __name__ == "__main__":
         bb_savedir = os.path.join(bbdir, title)
         if not os.path.exists(bb_savedir):
             os.mkdir(bb_savedir)
-            item = requests.get(bb_url)
+            item = safe_requests.get(bb_url)
             if item.status_code == 200:
                 print("Bounding box: status code 200: success")
             else:
