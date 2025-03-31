@@ -1,9 +1,9 @@
-from xml.etree import ElementTree
 import os
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 from PIL import Image
 import numpy as np
+import defusedxml.ElementTree
 
 
 def extract_bounding_box(xml_file, names_wanted):
@@ -13,7 +13,7 @@ def extract_bounding_box(xml_file, names_wanted):
     :param names_wanted: The wnid(s) that you want to extract from an image.
     :return: (dict (wnid(str), list(tuple()) dictionary keyed by named wanted with a list of tuples containing each instance bounding box
     '''
-    tree = ElementTree.parse(xml_file)
+    tree = defusedxml.ElementTree.parse(xml_file)
     root = tree.getroot()
     filename = root.find("filename")
     # print (filename.text)

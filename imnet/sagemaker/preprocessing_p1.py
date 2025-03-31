@@ -14,9 +14,9 @@ import pathlib
 import os
 import pandas as pd
 import shutil
-from xml.etree import ElementTree
 from PIL import Image
 import numpy as np
+import defusedxml.ElementTree
 
 
 def parse_annotation(filepath):
@@ -31,7 +31,7 @@ def parse_annotation(filepath):
     else:
         if os.path.splitext(filepath)[1] == ".xml":
             with open(filepath) as file_obj:
-                tree = ElementTree.parse(file_obj)
+                tree = defusedxml.ElementTree.parse(file_obj)
                 root = tree.getroot()
                 obj = root.find("object")
                 b = obj.find("bndbox")
