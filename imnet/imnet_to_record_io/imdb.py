@@ -18,6 +18,7 @@
 import numpy as np
 import os.path as osp
 import math
+import secrets
 
 class Imdb(object):
     """
@@ -164,8 +165,7 @@ class Imdb(object):
 
         if str_list:
             if shuffle:
-                import random
-                random.shuffle(str_list)
+                secrets.SystemRandom().shuffle(str_list)
             if not fname:
                 fname = self.name + '.lst'
             with open(fname, 'w') as f:

@@ -1,5 +1,4 @@
 import torch
-import random
 import timm
 import numpy as np
 import os
@@ -11,12 +10,13 @@ from torchvision.datasets import ImageFolder
 import torchvision.transforms as transforms
 
 from torchvision.transforms import CenterCrop
+import secrets
 
 
 def set_seed(args, use_gpu, print_out=True):
     if print_out:
         print('Seed:\t {}'.format(args.seed))
-    random.seed(args.seed)
+    secrets.SystemRandom().seed(args.seed)
     np.random.seed(args.seed)
     torch.manual_seed(args.seed)
     if use_gpu:
