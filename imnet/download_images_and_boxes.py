@@ -58,7 +58,7 @@ if __name__ == "__main__":
             savefile = os.path.join(save_dir, wnid + ".tar.gz")
             url = "http://www.image-net.org/download/synset?wnid=%s&username=%s&accesskey=%s&release=latest&src=stanford" % (
             wnid, _USER, _KEY)
-            item = requests.get(url)
+            item = requests.get(url, timeout=60)
             if item.status_code == 200:
                 print("Raw image: status code 200: success")
             else:
@@ -73,7 +73,7 @@ if __name__ == "__main__":
         bb_savedir = os.path.join(bbdir, title)
         if not os.path.exists(bb_savedir):
             os.mkdir(bb_savedir)
-            item = requests.get(bb_url)
+            item = requests.get(bb_url, timeout=60)
             if item.status_code == 200:
                 print("Bounding box: status code 200: success")
             else:
