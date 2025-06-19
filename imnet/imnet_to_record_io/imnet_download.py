@@ -1,8 +1,8 @@
 import argparse
-import requests
 import os
 import time
 import tarfile
+from security import safe_requests
 
 '''
 Important! The credentials here are private, please do not share these any external party
@@ -35,7 +35,7 @@ def download_imnet_dataset(target_folder, synsets):
             savefile = os.path.join(save_dir, wnid + ".tar.gz")
             url = "http://www.image-net.org/download/synset?wnid=%s&username=%s&accesskey=%s&release=latest&src=stanford" % (
             wnid, _USER, _KEY)
-            item = requests.get(url)
+            item = safe_requests.get(url)
 
             if item.status_code == 200:
                 print("Raw image: status code 200: success")
@@ -53,7 +53,7 @@ def download_imnet_dataset(target_folder, synsets):
 
         if not os.path.exists(bb_savedir):
             os.makedirs(bb_savedir)
-            item = requests.get(bb_url)
+            item = safe_requests.get(bb_url)
             if item.status_code == 200:
                 print("Bounding box: status code 200: success")
             else:

@@ -3,6 +3,7 @@ import requests
 import os
 import json
 import urllib.request
+from security import safe_requests
 
 class DataLoader():
     def __init__(self, name, dir, server_url):
@@ -15,7 +16,7 @@ class DataLoader():
 
 
     def get_bounding_images(self, long1, long2, lat1, lat2):
-        return requests.get(self.url, params={"bounds": [long1, lat1, long2, lat2]}, headers=self.headers)
+        return safe_requests.get(self.url, params={"bounds": [long1, lat1, long2, lat2]}, headers=self.headers)
 
     def download_image(self, url, id):
         fpath = os.path.join(self.download_dir, str(id)) # file corresponding to this id
