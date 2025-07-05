@@ -1,9 +1,8 @@
 import json
-
-import xml.etree.ElementTree as ET
 from datetime import datetime
 import os
 import urllib.request
+import defusedxml.ElementTree
 
 default_labels = ["HAS_TREE",
                   "NO_TREE",
@@ -35,7 +34,7 @@ def update_project_labels(working_folder, project_name):
     print("Abs path to raw species is " + raw_tree_species_filename)
 
     # Pass the path of the xml document
-    tree = ET.parse(raw_tree_species_filename)
+    tree = defusedxml.ElementTree.parse(raw_tree_species_filename)
 
     # get the parent tag
     root = tree.getroot()

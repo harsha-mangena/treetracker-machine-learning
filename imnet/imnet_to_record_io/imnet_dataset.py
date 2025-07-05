@@ -19,8 +19,8 @@ from __future__ import print_function
 import os
 import numpy as np
 from imdb import Imdb
-import xml.etree.ElementTree as ET
 import cv2
+import defusedxml.ElementTree
 
 
 class ImnetDb(Imdb):
@@ -236,7 +236,7 @@ class ImnetDb(Imdb):
 
 def get_labels_from_file(label_file, classes):
 
-    tree = ET.parse(label_file)
+    tree = defusedxml.ElementTree.parse(label_file)
     root = tree.getroot()
     size = root.find('size')
     width = float(size.find('width').text)
