@@ -20,11 +20,11 @@
 from __future__ import print_function
 import os
 import sys
+import secrets
 
 curr_path = os.path.abspath(os.path.dirname(__file__))
 sys.path.append(os.path.join(curr_path, "../python"))
 import mxnet as mx
-import random
 import argparse
 import cv2
 import time
@@ -75,8 +75,8 @@ def make_list(args):
     image_list = list_image(args.root, args.recursive, args.exts)
     image_list = list(image_list)
     if args.shuffle is True:
-        random.seed(100)
-        random.shuffle(image_list)
+        secrets.SystemRandom().seed(100)
+        secrets.SystemRandom().shuffle(image_list)
     N = len(image_list)
     chunk_size = (N + args.chunks - 1) // args.chunks
     for i in range(args.chunks):

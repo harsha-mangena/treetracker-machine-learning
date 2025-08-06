@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 
-import xmltodict, os, sys, sqlite3, random
+import xmltodict, os, sys, sqlite3
 import tensorflow as tf
+import secrets
 
 ################################ GLOBALS ######################################
 
@@ -282,7 +283,7 @@ def run(dataset_dir):
             sp_list = list(set(x[1] for x in all_images if x[2]==class_id))
             # test set = random 10% of species
             numel = int(max(round(0.1 * len(sp_list)), 1))
-            sp_sel = random.sample(sp_list, numel)
+            sp_sel = secrets.SystemRandom().sample(sp_list, numel)
             img_dir_test = mkdir(os.path.join(dataset_dir, 'validation', format(class_idx, class_id_formatstr)))
             for sp in sp_sel:
                 sp_list.remove(sp)
@@ -308,7 +309,7 @@ def run(dataset_dir):
             imgs = [x for x in all_images if x[1]==class_id]
             # test set = random 10% of images
             numel = int(max(round(0.1 * len(imgs)), 1))
-            img_sel = random.sample(imgs, numel)
+            img_sel = secrets.SystemRandom().sample(imgs, numel)
             img_dir = mkdir(os.path.join(dataset_dir, 'validation', format(class_idx, class_id_formatstr)))
             for img in img_sel:
                 imgs.remove(img)
