@@ -1,3 +1,5 @@
+import secrets
+
 def visualize_detection(img_file, dets, classes=[], thresh=0.6):
         """
         visualize detections in one image
@@ -13,7 +15,6 @@ def visualize_detection(img_file, dets, classes=[], thresh=0.6):
         thresh : float
             score threshold
         """
-        import random
         import matplotlib.pyplot as plt
         import matplotlib.image as mpimg
 
@@ -28,7 +29,7 @@ def visualize_detection(img_file, dets, classes=[], thresh=0.6):
                 continue
             cls_id = int(klass)
             if cls_id not in colors:
-                colors[cls_id] = (random.random(), random.random(), random.random())
+                colors[cls_id] = (secrets.SystemRandom().random(), secrets.SystemRandom().random(), secrets.SystemRandom().random())
             xmin = int(x0 * width)
             ymin = int(y0 * height)
             xmax = int(x1 * width)
